@@ -21,6 +21,13 @@ A new  preventative aides drug (triUmpsal) is under test in clinical trials. Con
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
+
+We need to get a subset of the data that consists of merely females.
+
+```{r}
+females <- filter(triUmp, gender=="F")
+```
+
 # Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -30,10 +37,25 @@ A new  preventative aides drug (triUmpsal) is under test in clinical trials. Con
 ### Graphical Descriptive Results
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
+```{r}
+barchartGC(~infected + treatment,data=females)
+barchartGC(~infected + treatment,data=females, type="percent")
+
+```
+
+The medication indicates that it did not take effect on females, in the chart. Women tends to attract aids very frequently that is difficult for the medication to come into effect when consuming drugs rather than consuming a placebo.
+
 
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=females)
+rowPerc(table1)
+colPerc(table1)
+```
+It seems as though a little over 58% of females who took triUmpsal ended up attracting aids. 41% of females who used placebo instead got aids. To sum it up, more women that took triUmpsal ended up having aids than the women that took the placebo.
 
 ## Inferential Results
 
